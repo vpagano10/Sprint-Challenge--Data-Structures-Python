@@ -1,4 +1,5 @@
 import time
+from binary_search_tree import BinarySearchTree
 
 start_time = time.time()
 
@@ -13,14 +14,39 @@ f.close()
 duplicates = []  # Return the list of duplicates in this data structure
 
 # Replace the nested for loops below with your improvements
-for name_1 in names_1:
-    for name_2 in names_2:
-        if name_1 == name_2:
-            duplicates.append(name_1)
+# for name_1 in names_1:
+#     for name_2 in names_2:
+#         if name_1 == name_2:
+#             duplicates.append(name_1)  # -> There will be 64 duplicates
+
+
+# make a binary search tree and initialize it with a root value of "String values"
+bst_names = BinarySearchTree("String values")
+
+# add all the names in one of the lists to a tree
+for name in names_1:
+    # insert method from binary_search_tree
+    bst_names.insert(name)
+
+# check each name in the other names list, if its in the tree add it to duplicates
+for name in names_2:
+    # contains method from binary_search_tree
+    if bst_names.contains(name):
+        duplicates.append(name)
+
+#
+#
+#
 
 end_time = time.time()
-print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
-print (f"runtime: {end_time - start_time} seconds")
+print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
+print(f"runtime: {end_time - start_time} seconds")
+
+
+#
+#
+#
+
 
 # ---------- Stretch Goal -----------
 # Python has built-in tools that allow for a very efficient approach to this problem

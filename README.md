@@ -47,17 +47,18 @@ buffer.append('a')
 buffer.append('b')
 buffer.append('c')
 
-buffer.get()   # should return ['a', 'b', 'c']
+buffer.get()   # should return ['c', 'b', 'a']
 
 # 'd' overwrites the oldest value in the ring buffer, which is 'a'
 buffer.append('d')
 
-buffer.get()   # should return ['d', 'b', 'c']
+buffer.get()   # should return ['d', 'c', 'b']
 
 buffer.append('e')
+   # should be ['e', 'd', 'c']
 buffer.append('f')
 
-buffer.get()   # should return ['d', 'e', 'f']
+buffer.get()   # should return ['f', 'e', 'd']
 ```
 
 #### Task 2. Runtime Optimization

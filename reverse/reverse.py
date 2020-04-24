@@ -1,8 +1,6 @@
 class Node:
     def __init__(self, value=None, next_node=None):
-        # the value at this linked list node
         self.value = value
-        # reference to the next node in the list
         self.next_node = next_node
 
     def get_value(self):
@@ -12,13 +10,11 @@ class Node:
         return self.next_node
 
     def set_next(self, new_next):
-        # set this node's next_node reference to the passed in node
         self.next_node = new_next
 
 
 class LinkedList:
     def __init__(self):
-        # reference to the head of the list
         self.head = None
 
     def add_to_head(self, value):
@@ -31,20 +27,37 @@ class LinkedList:
     def contains(self, value):
         if not self.head:
             return False
-        # get a reference to the node we're currently at; update this as we
-        # traverse the list
         current = self.head
-        # check to see if we're at a valid node
         while current:
-            # return True if the current value we're looking at matches our
-            # target value
             if current.get_value() == value:
                 return True
-            # update our current node to the current node's next node
             current = current.get_next()
-        # if we've gotten here, then the target node isn't in our list
         return False
 
     def reverse_list(self, node, prev):
         # You must use recursion for this solution
-        pass
+        # base for recursion: current node is none
+        if node == None:
+            return
+        # another base for recursion, we are at the last node to be reversed
+        # if the current node's next is none, that is the last item and becomes the new head
+        if node.next_node == None:
+            self.head = node
+            node.next_node = prev
+            return
+        # none of the ifs above are true, so must go again recursively,
+        # swap the values like the previous ex, where current and previous are not passed as parameters and are incremented by passing their new values in as the new params
+        # increase current node to its next
+        new_node = node.next_node
+        # next node becomes the prev
+        node.next_node = prev
+        self.reverse_list(new_node, node)
+
+        # current = self.head
+        # prev = None
+        # while current is not None:
+        #     next_node = current.next_node
+        #     current.next_node = prev
+        #     prev = current
+        #     current = next_node
+        # self.head = prev
